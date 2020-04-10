@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import { onMount } from 'svelte';
 
   onMount(() => {
@@ -12,7 +12,7 @@
       });
     }
   });
-</script>
+</script> -->
 
 <style>
 	h1, figure, p {
