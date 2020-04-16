@@ -23,11 +23,11 @@
       </div>
     </div>
     <nav class="{isOpen ? 'block' : 'hidden'} px-2 pt-2 pb-4 sm:flex sm:p-0 text-gray-400">
-      <a href="/services" class="block px-2 py-1 font-semibold rounded hover:bg-gray-800">Services</a>
-      <a href="/case-studies" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Case Studies</a>
-      <a href="/blog" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Blog</a>
-      <a href="/about" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">About</a>
-      <a href="/contact" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Contact</a>
+      <a rel='prefetch' href="/services" class="block px-2 py-1 font-semibold rounded hover:bg-gray-800">Services</a>
+      <a rel='prefetch' href="/case-studies" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Case Studies</a>
+      <a rel='prefetch' href="/blog" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Blog</a>
+      <a rel='prefetch' href="/about" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">About</a>
+      <a rel='prefetch' href="/contact" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Contact</a>
     </nav>
   </header>
 </div>
