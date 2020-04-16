@@ -1,5 +1,26 @@
-@import 'tailwindcss/base';
+@tailwind base;
+/* @import 'tailwindcss/base'; */
 
-@import 'tailwindcss/components';
+article .cms-content {
+  @apply font-serif;
+  @apply text-lg;
+}
 
-@import 'tailwindcss/utilities';
+article .cms-content p {
+  @apply my-5;
+}
+
+article .cms-content a {
+  @apply underline text-indigo-600;
+}
+
+article .cms-content li {
+  @apply list-disc;
+  @apply ml-8;
+}
+
+@tailwind components;
+/* @import 'tailwindcss/components'; */
+
+@tailwind utilities;
+/* @import 'tailwindcss/utilities'; */

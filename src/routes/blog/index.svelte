@@ -1,5 +1,6 @@
 <script context="module">
   import axios from 'axios';
+  // import { posts } from './_posts';
 
   export function preload({ params, query }) {
     return axios
@@ -8,6 +9,7 @@
         return { posts: res.data.posts };
       })
       .catch((err) => this.error(500, err));
+
   }
 </script>
 
@@ -23,9 +25,11 @@
 <div class="px-8 mx-auto max-w-4xl bg-gray-900 mt-1 sm:mt-6 mb-8 sm:mb-16">
   <h1 class="text-4xl text-indigo-400">Recent posts</h1>
 
-  <ul>
-    {#each posts as post}
-      <PostSummary {post} />
-    {/each}
-  </ul>
+  <section>
+    <article>
+      {#each posts as post}
+        <PostSummary {post} />
+      {/each}
+    </article>
+  </section>
 </div>

@@ -1,68 +1,39 @@
 <script context="module">
-  // import client from "../../sanityClient";
-  // import BlockContent from "@movingbrands/svelte-portable-text";
-  // import serializers from "../../components/serializers";
-  // export async function preload({ params }) {
-    // the `slug` parameter is available because
-    // this file is called [slug].html
-  //   const { slug } = params;
-  //   const filter = '*[_type == "post" && slug.current == $slug][0]';
-  //   const projection = `{
-  //     ...,
-  //     body[]{
-  //       ...,
-  //       children[]{
-  //         ...,
-  //         _type == 'authorReference' => {
-  //           _type,
-  //           author->
-  //         }
-  //       }
-  //     }
-  //   }`;
+  import axios from 'axios';
 
-  //   const query = filter + projection;
-  //   const post = await client
-  //     .fetch(query, { slug })
-  //     .catch(err => this.error(500, err));
-  //   return { post };
-  // }
+  export function preload({ params, query }) {
+    const { slug } = params;
+    return axios
+      .get('process.env.WP_SITE')
+      .then((res) => {
+        let post;
+        let i = 0;
+        while (i < res.data.posts.length) {
+          if (res.data.posts[i].slug === slug) {
+            post = res.data.posts[i];
+            break;
+          }
+          i++;
+        }
+        return { post };
+      })
+      .catch((err) => this.error(500, err));
+  }
 </script>
 
 <script>
-  // export let post;
+  export let post;
 </script>
 
-<style>
-  /* .content :global(h2) {
-    font-size: 1.4em;
-    font-weight: 500;
-  }
-
-  .content :global(img) {
-    display: block;
-    max-width: 100%;
-  }
-
-  .content :global(figure) {
-    margin: 0;
-  }
-
-  .content :global(ul) {
-    line-height: 1.5;
-  }
-
-  .content :global(li) {
-    margin: 0 0 0.5em 0;
-  } */
-</style>
-
 <svelte:head>
-  <!-- <title>{post.title}</title> -->
+  <title>{post.title}</title>
 </svelte:head>
 
-<!-- <h1>{post.title}</h1> -->
-
-<!-- <div class="content">
-  <BlockContent blocks={post.body} {serializers} />
-</div> -->
+<article class="max-w-2xl mx-4 sm:mx-auto mt-4 sm:mt-8 mb-12 sm:mb-20 text-gray-200">
+  <h1 class="text-3xl my-4 font-semibold leading-tight">
+    {post.title}
+  </h1>
+  <div class="cms-content">
+    {@html post.content}
+  </div>
+</article>
