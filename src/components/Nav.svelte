@@ -1,12 +1,14 @@
 <script>
- let isOpen = false;
+  let isOpen = false;
 </script>
 
 <div class="bg-gray-900 mx-auto">
-  <header class="sm:max-w-screen-xl sm:flex sm:justify-between sm:items-center px-4 sm:px-6 lg:px-8 sm:py-3">
-    <div class="flex text-gray-300 items-center justify-between px-4 py-3 sm:p-0">
+  <header class="sm:max-w-screen-xl sm:flex sm:justify-between sm:items-center px-2 sm:px-6 lg:px-8 sm:py-3">
+    <div class="flex text-gray-300 items-center justify-between px-2 py-3 sm:p-0">
       <div>
-        <img class="h-6" src="/img/logo-inverted.svg" alt="Muse Marketing">
+        <a href="/">
+          <img class="h-6" src="/img/logo-inverted.svg" alt="Muse">
+        </a>
       </div>
       <div class="sm:hidden">
         <button on:click={() => isOpen = !isOpen} type="button" class="block text-gray-500 hover:text-white focus:text-white focus:outline-none">
