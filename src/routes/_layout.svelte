@@ -6,23 +6,15 @@
   // console.log('Preloading', preloading);
 
   import Nav from '../components/Nav.svelte';
-
-	export let segment;
+  import Footer from '../components/Footer.svelte';
 </script>
 
-<style>
-	main {
-		position: relative;
-		max-width: 56em;
-		background-color: white;
-		padding: 1em;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-</style>
+<div class="bg-gray-900 inset-0 h-full w-full">
+  <Nav />
 
-<Nav {segment}/>
+  <main>
+    <slot></slot>
+  </main>
 
-<main>
-	<slot></slot>
-</main>
+  <Footer />
+</div>

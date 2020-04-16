@@ -1,54 +1,31 @@
 <script>
-	export let segment;
+ let isOpen = false;
 </script>
 
-<style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
-	li {
-		display: block;
-		float: left;
-	}
-	.selected {
-		position: relative;
-		display: inline-block;
-	}
-	.selected::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
-	}
-</style>
-
-<nav>
-	<ul>
-		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>home</a></li>
-		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>about</a></li>
-
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch class='{segment === "blog" ? "selected" : ""}' href='blog'>blog</a></li>
-	</ul>
-</nav>
+<div class="bg-gray-900 mx-auto">
+  <header class="sm:max-w-screen-xl sm:flex sm:justify-between sm:items-center px-4 sm:px-6 lg:px-8 sm:py-3">
+    <div class="flex text-gray-300 items-center justify-between px-4 py-3 sm:p-0">
+      <div>
+        <img class="h-6" src="/img/logo-inverted.svg" alt="Muse Marketing">
+      </div>
+      <div class="sm:hidden">
+        <button on:click={() => isOpen = !isOpen} type="button" class="block text-gray-500 hover:text-white focus:text-white focus:outline-none">
+          <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+            {#if isOpen}
+              <path fill-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"/>
+            {:else}
+              <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
+            {/if}
+          </svg>
+        </button>
+      </div>
+    </div>
+    <nav class="{isOpen ? 'block' : 'hidden'} px-2 pt-2 pb-4 sm:flex sm:p-0 text-gray-400">
+      <a href="/services" class="block px-2 py-1 font-semibold rounded hover:bg-gray-800">Services</a>
+      <a href="/case-studies" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Case Studies</a>
+      <a href="/blog" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Blog</a>
+      <a href="/about" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">About</a>
+      <a href="/contact" class="mt-1 block px-2 py-1 font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Contact</a>
+    </nav>
+  </header>
+</div>

@@ -16,10 +16,10 @@ polka()
     sirv('static', { dev }),
     sapper.middleware({
       session: (req, res) => ({
-        config
-      })
-    })
+        config,
+      }),
+    }),
   )
-  .listen(PORT, err => {
+  .listen(PORT, (err) => {
     if (err) console.log('error', err);
   });

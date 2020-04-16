@@ -3,14 +3,16 @@ import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import resolve from 'rollup-plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
-import replace from 'rollup-plugin-replace';
+import replace from '@rollup/plugin-replace';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
+import dotenv from 'dotenv';
 import pkg from './package.json';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
+dotenv.config();
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) =>
@@ -18,7 +20,7 @@ const onwarn = (warning, onwarn) =>
     /[/\\]@sapper[/\\]/.test(warning.message)) ||
   onwarn(warning);
 
-const dedupe = importee =>
+const dedupe = (importee) =>
   importee === 'svelte' || importee.startsWith('svelte/');
 
 const purgecss = require('@fullhuman/postcss-purgecss')({
@@ -26,7 +28,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
   content: ['./src/**/*.html', './src/**/*.svelte', './src/**/*.css'],
 
   // Include any special characters you're using in this regular expression
-  defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
+  defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
 });
 
 export default {
@@ -36,16 +38,17 @@ export default {
     plugins: [
       replace({
         'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode)
+        'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.WP_SITE': process.env.WP_SITE,
       }),
       svelte({
         dev,
         hydratable: true,
-        emitCss: true
+        emitCss: true,
       }),
       resolve({
         browser: true,
-        dedupe
+        dedupe,
       }),
       commonjs(),
       json(),
@@ -59,27 +62,27 @@ export default {
             [
               '@babel/preset-env',
               {
-                targets: '> 0.25%, not dead'
-              }
-            ]
+                targets: '> 0.25%, not dead',
+              },
+            ],
           ],
           plugins: [
             '@babel/plugin-syntax-dynamic-import',
             [
               '@babel/plugin-transform-runtime',
               {
-                useESModules: true
-              }
-            ]
-          ]
+                useESModules: true,
+              },
+            ],
+          ],
         }),
 
       !dev &&
         terser({
-          module: true
-        })
+          module: true,
+        }),
     ],
-    onwarn
+    onwarn,
   },
 
   server: {
@@ -88,11 +91,12 @@ export default {
     plugins: [
       replace({
         'process.browser': false,
-        'process.env.NODE_ENV': JSON.stringify(mode)
+        'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.WP_SITE': process.env.WP_SITE,
       }),
       svelte({
         generate: 'ssr',
-        dev
+        dev,
       }),
       postcss({
         extract: './static/global.css',
@@ -105,21 +109,21 @@ export default {
           !dev && purgecss,
           !dev &&
             require('cssnano')({
-              preset: 'default'
-            })
-        ].filter(Boolean)
+              preset: 'default',
+            }),
+        ].filter(Boolean),
       }),
       resolve({
-        dedupe
+        dedupe,
       }),
       commonjs(),
-      json()
+      json(),
     ],
     external: Object.keys(pkg.dependencies).concat(
       require('module').builtinModules ||
-        Object.keys(process.binding('natives'))
+        Object.keys(process.binding('natives')),
     ),
-    onwarn
+    onwarn,
   },
 
   serviceworker: {
@@ -129,11 +133,11 @@ export default {
       resolve(),
       replace({
         'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode)
+        'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       commonjs(),
-      !dev && terser()
+      !dev && terser(),
     ],
-    onwarn
-  }
+    onwarn,
+  },
 };

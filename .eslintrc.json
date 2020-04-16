@@ -1,9 +1,15 @@
 {
-  "extends": ["eslint:recommended"],
+  "extends": ["eslint:recommended", "plugin:cypress/recommended"],
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module"
   },
+  "overrides": [
+    {
+      "files": ["**/*.svelte"],
+      "processor": "svelte3/svelte3"
+    }
+  ],
   "rules": {
     "no-unused-vars": ["error", { "args": "none" }],
     "no-console": "off"
