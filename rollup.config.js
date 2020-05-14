@@ -1,13 +1,13 @@
+import replace from '@rollup/plugin-replace';
+import dotenv from 'dotenv';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import resolve from 'rollup-plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
-import replace from '@rollup/plugin-replace';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
-import dotenv from 'dotenv';
 import pkg from './package.json';
 
 const mode = process.env.NODE_ENV;
@@ -99,7 +99,7 @@ export default {
         dev,
       }),
       postcss({
-        extract: './static/global.css',
+        extract: 'static/global.css',
         plugins: [
           require('postcss-import'),
           require('tailwindcss'), // See tailwind.config.js
