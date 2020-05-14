@@ -1,17 +1,18 @@
-const colors = {
-  'primary-blue': '#0e2730'
-};
+const { colors } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   theme: {
     container: {
       center: true,
-      padding: '2rem'
+      padding: '2rem',
     },
     extend: {
-      colors
-    }
+      colors: {
+        primary: colors.indigo,
+        secondary: colors.orange,
+      },
+    },
   },
   variants: {},
-  plugins: []
+  plugins: [],
 };
