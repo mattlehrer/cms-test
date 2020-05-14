@@ -1,5 +1,8 @@
 @tailwind base;
-/* @import 'tailwindcss/base'; */
+
+body {
+  @apply text-gray-200 bg-gray-900;
+}
 
 article .cms-content {
   @apply font-serif;
@@ -11,7 +14,7 @@ article .cms-content p {
 }
 
 article .cms-content a {
-  @apply underline text-indigo-600;
+  @apply underline text-secondary-600;
 }
 
 article .cms-content li {
@@ -20,7 +23,5 @@ article .cms-content li {
 }
 
 @tailwind components;
-/* @import 'tailwindcss/components'; */
 
 @tailwind utilities;
-/* @import 'tailwindcss/utilities'; */
