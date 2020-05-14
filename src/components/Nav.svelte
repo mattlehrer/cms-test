@@ -2,8 +2,8 @@
   let isOpen = false;
 </script>
 
-<div class="bg-gray-900 mx-auto">
-  <header class="sm:max-w-screen-xl sm:flex sm:justify-between sm:items-center px-2 sm:px-6 lg:px-8 sm:py-3">
+<div class="mx-auto">
+  <header class="mx-auto sm:flex sm:justify-between sm:items-center px-2 md:mx-16 sm:py-3">
     <div class="flex text-gray-300 items-center justify-between px-2 py-3 sm:p-0">
       <div>
         <a href="/">
