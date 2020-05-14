@@ -9,12 +9,10 @@
   import Footer from '../components/Footer.svelte';
 </script>
 
-<div class="bg-gray-900 inset-0 h-full w-full">
-  <Nav />
+<Nav />
 
-  <main>
-    <slot></slot>
-  </main>
+<main>
+  <slot></slot>
+</main>
 
-  <Footer />
-</div>
+<Footer />
