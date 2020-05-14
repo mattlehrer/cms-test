@@ -1,15 +1,8 @@
 <script context="module">
-  import axios from 'axios';
-  // import { posts } from './_posts';
-
   export function preload({ params, query }) {
-    return axios
-      .get('process.env.WP_SITE')
-      .then((res) => {
-        return { posts: res.data.posts };
-      })
-      .catch((err) => this.error(500, err));
-
+    return this.fetch(`/blog.json`).then(r => r.json()).then(posts => {
+      return { posts };
+    });
   }
 </script>
 
@@ -22,8 +15,8 @@
   <title>Blog</title>
 </svelte:head>
 
-<div class="px-8 mx-auto max-w-4xl bg-gray-900 mt-1 sm:mt-6 mb-8 sm:mb-16">
-  <h1 class="text-4xl text-indigo-400">Recent posts</h1>
+<div class="px-2 mx-4 sm:mx-auto max-w-2xl mt-1 sm:mt-6 mb-8 sm:mb-16">
+  <h1 class="text-4xl text-primary-400">Recent posts</h1>
 
   <section>
     <article>

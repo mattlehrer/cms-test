@@ -1,24 +1,8 @@
 <script context="module">
-  import axios from 'axios';
-
-  export function preload({ params, query }) {
-    const { slug } = params;
-    return axios
-      .get('process.env.WP_SITE')
-      .then((res) => {
-        let post;
-        let i = 0;
-        while (i < res.data.posts.length) {
-          if (res.data.posts[i].slug === slug) {
-            post = res.data.posts[i];
-            break;
-          }
-          i++;
-        }
-        return { post };
-      })
-      .catch((err) => this.error(500, err));
-  }
+	export async function preload({ params }) {
+		const res = await this.fetch(`blog/${params.slug}.json`);
+		return res.ok ? { post: await res.json() } : this.error(404, 'Not found');
+	}
 </script>
 
 <script>
